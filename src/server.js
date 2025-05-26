@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import dotenv from "dotenv";
 import cors from 'cors'
+import './trialReminder'
 import routes from './routes'
 import { connectMongoDB } from './config/dbConnection'
 import { corsConfig } from './config/cors'

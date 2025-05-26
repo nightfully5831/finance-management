@@ -29,7 +29,15 @@ export const userSchema = new Schema(
     },
     resetPasswordExpires: {
       type: Date
-    }
+    },
+    trialEndsAt: { 
+      type: Date, 
+      required: true 
+    },
+    notifiedBeforeExpiry: { 
+      type: Boolean, 
+      default: false 
+    },
   },
   { versionKey: false, timestamps: true }
 )
