@@ -195,7 +195,7 @@ export const CONTROLLER_AUTH = {
     }
     
     user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 3600000; 
+    user.resetPasswordExpires = Date.now() + 300; // 5 minute available
     await user.save();
     const transporter = nodemailer.createTransport({
       service: 'Gmail', 
