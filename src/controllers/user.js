@@ -1,18 +1,12 @@
-// * Libraries
 import { StatusCodes } from 'http-status-codes'
 import dotenv from 'dotenv'
+import { User } from '../models'
+import { asyncMiddleware } from '../middlewares'
 
 dotenv.config()
 
-// * Models
-import { User } from '../models'
-
-// * Middlewares
-import { asyncMiddleware } from '../middlewares'
 
 export const CONTROLLER_USER = {
-  // ZEAL FITNESS APP APIS
-
   profile: asyncMiddleware(async (req, res) => {
     const { _id } = req.user
     const id = req.query.id

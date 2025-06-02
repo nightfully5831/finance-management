@@ -59,9 +59,10 @@ export const CONTROLLER_REVENUE = {
       if (result.length == 0) {
         return res.status(404).json({ message: "Revenue Not Founded!" });
       }
-      res
-        .status(201)
-        .json({ message: "Revenue Successfully Downloaded!", data: result });
+      res.status(201).json({ 
+        message: "Revenue Successfully Downloaded!", 
+        data: result 
+      });
     } catch (error) {
       res.status(500).json({ message: "Server error", error: error.message });
     }
@@ -83,10 +84,10 @@ export const CONTROLLER_REVENUE = {
         },
         {
           $project: {
-            accountId: { $arrayElemAt: ["$data", 0] }, 
-            description: { $arrayElemAt: ["$data", 1] }, 
-            amount: { $arrayElemAt: ["$data", 2] }, 
-            code: { $arrayElemAt: ["$data", 3] }, 
+            accountId: { $arrayElemAt: ["$data", 0] },
+            description: { $arrayElemAt: ["$data", 1] },
+            amount: { $arrayElemAt: ["$data", 2] },
+            code: { $arrayElemAt: ["$data", 3] },
           },
         },
         {

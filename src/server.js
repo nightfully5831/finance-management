@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import cors from 'cors'
 import './trialReminder'
 import routes from './routes'
+import webhookRoutes from './routes/webhooks'
 import { connectMongoDB } from './config/dbConnection'
 import { corsConfig } from './config/cors'
 import { createServer } from 'node:http'
@@ -25,9 +26,11 @@ app.use(logger('dev'))
 app.use(cookieParser())
 app.use(cors(corsConfig))
 
-app.use(express.json({ limit: '50mb', extended: true }))
+app.use('/api/webhook', express.raw({ type: 'application/json' }), webhookRoutes)
 
+app.use(express.json({ limit: '50mb', extended: true }))
 app.use('/api', routes)
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(clientBuildPath, 'index.html'));

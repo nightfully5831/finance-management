@@ -46,39 +46,6 @@ export const getRoleShortName = (userType, role) => {
   }
 }
 
-export function getCurrentDayName() {
-  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const currentDate = new Date()
-  return daysOfWeek[currentDate.getDay()]
-}
-
-export const getDateForDay = (startDate, targetDay) => {
-  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-  const startDayIndex = new Date(startDate).getDay()
-  const targetDayIndex = dayNames.indexOf(targetDay.toLowerCase())
-
-  // Calculate the difference in days
-  let dayDifference = targetDayIndex - startDayIndex
-  if (dayDifference < 0) {
-    dayDifference += 7
-  }
-
-  // Calculate the target date
-  const targetDate = new Date(startDate)
-  targetDate.setDate(targetDate.getDate() + dayDifference)
-  return targetDate.toISOString()
-}
-
-export function getStartOfDayISO(date) {
-  const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate())
-  return localDate.toLocaleDateString('en-CA')
-}
-
-export function getDayName(date) {
-  return date.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase()
-}
-
-export const convertTimeToSeconds = (timeString) => {
-  const [hours, minutes, seconds] = timeString.split(':').map(Number)
-  return hours * 3600 + minutes * 60 + seconds
+export const PLAN_TYPES = {
+  free: "price_free", common:"price_1RRfV4PK2rhKqgs1un7npYB3", pro:"price_1RRfVePK2rhKqgs1k665W3Mj"
 }

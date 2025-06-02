@@ -23,6 +23,9 @@ export const userSchema = new Schema(
       type: String, 
       required: true 
     },
+    subscriptionID: {
+      type: String,
+    },
     refreshTokens: [String],
     resetPasswordToken: {
       type: String
