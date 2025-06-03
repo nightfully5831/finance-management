@@ -5,16 +5,26 @@ import { User } from '../models'
 
 dotenv.config();
 
-const router = express.Router();
+const webhookRouter = express.Router();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-router.post("", async (req, res) => {
+webhookRouter.post("", express.raw({ type: 'application/json' }), async (req, res) => {
+  const body = Buffer.isBuffer(req.body) ? req.body : Buffer.from(req.body);
+  console.log("✅ Stripe webhook hit");
+  console.log('body', body );
+  
   const sig = req.headers["stripe-signature"];
+
+  if (!sig) {
+    console.error("❌ No Stripe signature found in headers");
+    return res.status(400).send("No Stripe signature found");
+  }
+
   let event;
 
   try {
     event = stripe.webhooks.constructEvent(
-      req.body,
+      body,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
@@ -67,4 +77,4 @@ router.post("", async (req, res) => {
   }
 });
 
-export default router;
+export default webhookRouter;

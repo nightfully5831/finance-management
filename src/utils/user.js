@@ -47,5 +47,5 @@ export const getRoleShortName = (userType, role) => {
 }
 
 export const PLAN_TYPES = {
-  free: "price_free", common:"price_1RRfV4PK2rhKqgs1un7npYB3", pro:"price_1RRfVePK2rhKqgs1k665W3Mj"
+  free: "price_1R0Xe902EF3FQcIQvGKOMZ9S", common:"price_1R1clP02EF3FQcIQYmFj9rxn", pro:"price_1R0XeD02EF3FQcIQDMxYwv7D"
 }
