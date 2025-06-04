@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 9 * * *', async () => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 

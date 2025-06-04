@@ -1,14 +1,13 @@
 import express from 'express'
-import path from 'path'
-import cookieParser from 'cookie-parser'
-import logger from 'morgan'
 import dotenv from "dotenv";
+import path from 'path'
 import cors from 'cors'
-import './trialReminder'
-import routes from './routes'
 import { connectMongoDB } from './config/dbConnection'
 import { corsConfig } from './config/cors'
 import { createServer } from 'node:http'
+import webhookRouter from './routes/webhooks';
+import routes from './routes'
+import './trialReminder'
 
 dotenv.config();
 const app = express()
@@ -21,13 +20,11 @@ const PORT = process.env.PORT || 5000
 const clientBuildPath = path.join(__dirname, '../client/build');
 app.use(express.static(clientBuildPath));
 
-app.use(logger('dev'))
-app.use(cookieParser())
+app.use('/webhook', express.raw({ type: 'application/json' }), webhookRouter)
+
 app.use(cors(corsConfig))
 
-app.use(express.json({ limit: '50mb', extended: true }))
-
-app.use('/api', routes)
+app.use('/api', express.json({ limit: '50mb' }), routes)
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(clientBuildPath, 'index.html'));
